@@ -33,14 +33,14 @@ function AppTabs() {
 
       labelStyle: {
         fontFamily: 'Archivo_700Bold',
-        fontSize: 13,
+        fontSize: 14,
         marginLeft: 16
       },
 
-      inactiveBackgroundColor: colors.colorTextLight,
+      inactiveBackgroundColor: colors.color6,
       activeBackgroundColor: colors.colorTextLight,
       inactiveTintColor: '#ddd',
-      activeTintColor: colors.colorTextDark
+      activeTintColor: colors.colorTextDark,
     }}>
       <Screen
         name="FreelancersList"

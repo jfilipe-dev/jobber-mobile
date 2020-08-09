@@ -7,6 +7,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: colors.background,
   },
+
+  freelancerList: {
+    marginTop: -60,
+  }
 });
 
 export default styles;
