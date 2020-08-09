@@ -17,6 +17,10 @@ function Landing() {
     navigation.navigate('PromoteServices');
   }
 
+  function handleNavigateToAppTabs() {
+    navigation.navigate('AppTabs');
+  }
+
   return (
     <View style={styles.container}>
       <Image style={styles.banner} source={heroImg} />
@@ -32,7 +36,7 @@ function Landing() {
           <Text style={styles.buttonText}>Promover trabalho</Text>
         </RectButton>
 
-        <RectButton style={[styles.button, styles.buttonSearch]}>
+        <RectButton onPress={handleNavigateToAppTabs} style={[styles.button, styles.buttonSearch]}>
           <Image source={searchIcon} style={styles.icon} />
           <Text style={styles.buttonText}>Procurar freelancers</Text>
         </RectButton>
