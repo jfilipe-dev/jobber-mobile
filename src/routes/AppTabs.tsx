@@ -13,8 +13,6 @@ function AppTabs() {
   return (
     <Navigator tabBarOptions={{
       style: {
-        elevation: 0,
-        shadowOpacity: 0,
         height: 64,
         borderTopWidth: 0
       },
@@ -37,8 +35,8 @@ function AppTabs() {
         marginLeft: 16
       },
 
-      inactiveBackgroundColor: colors.color6,
-      activeBackgroundColor: colors.colorTextLight,
+      inactiveBackgroundColor: colors.color7,
+      activeBackgroundColor: colors.color6,
       inactiveTintColor: '#ddd',
       activeTintColor: colors.colorTextDark,
     }}>

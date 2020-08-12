@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
 
   buttonsContainer: {
     flexDirection: 'row',
-    marginTop: 16
+    marginTop: 16,
+    width: '100%'
   },
 
   favoriteButton: {
@@ -98,7 +99,6 @@ const styles = StyleSheet.create({
   contactButton: {
     backgroundColor: colors.color5,
     flex: 1,
-    width: 56,
     height: 56,
     borderRadius: 8,
     flexDirection: 'row',
