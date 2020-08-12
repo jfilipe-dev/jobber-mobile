@@ -9,6 +9,7 @@ import whatsappIcon from '../../assets/img/icons/whatsapp.png';
 import colors from '../../assets/global';
 import styles from './styles';
 import api from '../../services/api';
+import formatValue from '../../utils/formatValue';
 
 export interface Freelancer {
   id: number,
@@ -82,7 +83,7 @@ const Freelanceritem: React.FC<FreelancerItemProps> = ({ freelancer, favorited }
       <View style={styles.footer}>
         <Text style={styles.price}>
           Preço/hora trabalhada {'   '}
-          <Text style={styles.priceValue}>{freelancer.cost}</Text>
+          <Text style={styles.priceValue}>{formatValue(freelancer.cost)}</Text>
         </Text>
 
         <View style={styles.buttonsContainer}>
