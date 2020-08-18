@@ -49,6 +49,37 @@ const styles = StyleSheet.create({
     textAlign: 'justify'
   },
 
+  portifolioButton: {
+    marginHorizontal: 24,
+    marginTop: 12,
+  },
+
+  portifolioButtonText: {
+    fontFamily: 'Archivo_700Bold',
+    fontSize: 18,
+    color: colors.color3
+  },
+
+  skillsTitle: {
+    fontFamily: 'Archivo_700Bold',
+    fontSize: 16,
+    marginHorizontal: 24,
+    marginTop: 12,
+    color: colors.colorText
+  },
+
+  skillsTitleItem: {
+    marginHorizontal: 24,
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 14,
+    lineHeight: 24,
+    color: colors.colorText
+  },
+
+  skillsTitleItemSkill: {
+    color: colors.color4
+  },
+
   footer: {
     backgroundColor: colors.color6,
     padding: 24,

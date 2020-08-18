@@ -1,4 +1,4 @@
-import intl from 'intl';
+import Intl from 'intl';
 import 'intl/locale-data/jsonp/pt-BR';
 
 

@@ -8,6 +8,8 @@ import { Poppins_400Regular, Poppins_600SemiBold } from '@expo-google-fonts/popp
 
 import AppStack from './src/routes/AppStack';
 
+import { FavoritesProvider } from './src/context/FavoritesContext';
+
 export default function App() {
    let [fontsLoaded] = useFonts({
     Archivo_400Regular,
@@ -21,7 +23,9 @@ export default function App() {
   } else {
     return (
       <>
-        <AppStack />
+        <FavoritesProvider>
+          <AppStack />
+        </FavoritesProvider>
         <StatusBar style="light"/>
       </>
     );

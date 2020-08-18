@@ -1,14 +1,17 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { View, ScrollView, Text, TextInput } from 'react-native';
+import React, { useState, useEffect, useContext } from 'react';
+import { View, ScrollView, Text, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { BorderlessButton, RectButton } from 'react-native-gesture-handler';
-import AsyncStorage from '@react-native-community/async-storage';
-import {Picker} from '@react-native-community/picker';
+import { Picker } from '@react-native-community/picker';
 
 import PageHeader from '../../components/PageHeader';
 import Freelanceritem, { Freelancer } from '../../components/FreelancerItem';
 
 import api from '../../services/api';
+
+import sadIcon from '../../assets/img/icons/sad.png';
+
+import FavoritesContext from '../../context/FavoritesContext';
 
 import colors from '../../assets/global';
 import styles from './styles';
@@ -20,39 +23,38 @@ function FreelancersList() {
   const [cost, setCost] = useState('');
 
   const [freelancers, setFreelancers] = useState([]);
-  const [favorites, setFavorites] = useState<number[]>([]);
+
+  const [loading, setLoading] = useState(true);
+
+  const { favorites, loadFavorites } = useContext(FavoritesContext);
 
   function handleToggleFilterVisible() {
     setIsFilterVisible(!isFilterVisible)
   }
 
-  function loadFavorites() {
-    AsyncStorage.getItem('favorites').then(response => {
-      if (response) {
-        const favoritedFreelancers = JSON.parse(response);
-        const favoritedFreelancersIds = favoritedFreelancers.map((freelancer: Freelancer) => {
-          return freelancer.id;
-        })
-        setFavorites(favoritedFreelancersIds)
-      }
-    });
-  }
-
-  function loadFreelancers() {
-    api.get('/services', {
+  async function loadFreelancers() {
+    setLoading(true);
+    let mounted = true;
+    const response = await api.get('/services', {
       params: {
         service,
         cost
       }
-    }).then((response) => {      
-      setFreelancers(response.data);
-      console.log(freelancers)
-      loadFavorites();      
-    });
+    })  
+    const { data } = response
+    if (mounted) {
+      setFreelancers(data);
+      loadFavorites();
+      setLoading(false);
+    }
+
+    return function cleanup() {
+      mounted = false
+    }
   }
 
-  function handelFiltersSubmit() {
-    loadFreelancers();
+  async function handelFiltersSubmit() {
+    await loadFreelancers();
     handleToggleFilterVisible();
   }
 
@@ -124,21 +126,32 @@ function FreelancersList() {
         )}
       </PageHeader>
 
-      <ScrollView
-        style={styles.freelancerList}
-        contentContainerStyle={{
-          paddingHorizontal: 16,
-          paddingBottom: 16
-        }}
-      >
-        {freelancers.map((freelancer: Freelancer) => (
-          <Freelanceritem
-            key={freelancer.id}
-            freelancer={freelancer}
-            favorited={favorites.includes(freelancer.id)}
-          />
-        ))}
-      </ScrollView>
+      {loading ? <Text style={styles.loading}>Carregando...</Text>
+        : freelancers.length > 0 ? (
+          <ScrollView
+          style={styles.freelancerList}
+          contentContainerStyle={{
+            paddingHorizontal: 16,
+            paddingBottom: 16
+          }}
+        >
+          {freelancers.map((freelancer: Freelancer) => (
+            <Freelanceritem
+              key={freelancer.id}
+              freelancer={freelancer}
+              favorited = {!!(favorites.map(favorite => favorite.id === freelancer.id))}
+            />
+          ))}
+        </ScrollView>
+        ) : (
+          <View style={styles.emptyList}>
+            <Image source={sadIcon} style={styles.sadIcon} />
+            <Text style={styles.opsTitle}>Ops...</Text>
+            <Text style={styles.opsTitleText}>Não encontramos jobbers com os filtros que você procurou.</Text>
+          </View>
+        )
+      }
+      
     </View>
   );
 }
