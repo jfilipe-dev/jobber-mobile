@@ -100,16 +100,18 @@ const Freelanceritem: React.FC<FreelancerItemProps> = ({ freelancer, favorited }
         {freelancer.bio} 
       </Text>
 
-      <TouchableOpacity onPress={handleOpenPortifolio} style={styles.portifolioButton}>
-        <Text style={styles.portifolioButtonText}>Acessar portifólio</Text>
-      </TouchableOpacity>
-
       <Text style={styles.skillsTitle}>Habilidades</Text>
       {skills.map((skill: SkillItem) => {
         return (
           <Text key={skill.id} style={styles.skillsTitleItem}>{skill.level} em <Text style={styles.skillsTitleItemSkill}>{skill.skill}</Text></Text>
         )
       })}
+
+      {freelancer.portifolio ? (
+        <TouchableOpacity onPress={handleOpenPortifolio} style={styles.portifolioButton}>
+          <Text style={styles.portifolioButtonText}>Acessar portifólio</Text>
+        </TouchableOpacity>
+      ) : <Text style={styles.noPortifolio}>Esse jobber não possui portifólio.</Text>}
 
       <View style={styles.footer}>
         <Text style={styles.price}>

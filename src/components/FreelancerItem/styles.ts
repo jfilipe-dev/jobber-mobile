@@ -77,7 +77,15 @@ const styles = StyleSheet.create({
   },
 
   skillsTitleItemSkill: {
-    color: colors.color4
+    color: colors.color4,
+  },
+
+  noPortifolio: {
+    color: colors.colorText,
+    marginHorizontal: 24,
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 14,
+  marginTop: 12,
   },
 
   footer: {
