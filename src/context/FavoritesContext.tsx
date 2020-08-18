@@ -12,11 +12,6 @@ interface Freelancer {
   cost: number,
 }
 
-interface FreelancerItemProps {
-  freelancer: Freelancer;
-  favorited: boolean;
-}
-
 interface FavoritesContextData {
   loadFavorites(): Promise<void>;
   addFavorite(freelancer: Freelancer): void;
@@ -36,7 +31,6 @@ export const FavoritesProvider: React.FC = ({ children }) => {
         setFavorites(favoritedFreelancers);
       }
     });
-    console.log(favorites)
   }, []);
 
   const addFavorite = useCallback( async (freelancer) => {
@@ -45,8 +39,6 @@ export const FavoritesProvider: React.FC = ({ children }) => {
     setFavorites(favoritesArray);
 
     await AsyncStorage.setItem('favorites1', JSON.stringify(favorites));
-
-    console.log
   }, []);
 
   const removeFavorite = useCallback( async (freelancer) => {
